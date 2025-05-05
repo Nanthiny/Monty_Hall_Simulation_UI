@@ -1,0 +1,26 @@
+<div class="card shadow p-3 user-input">
+  <!-- form group for user input of simulations count -->
+  <div class="form-group">
+    <label class="fw-bold">Enter number of simulations : </label>
+    <input pInputText class="game-count" type="number" [(ngModel)]="numberOfGames" [min]="1" required
+      placeholder="Enter number of games" #simulation="ngModel" (keypress)="allowOnlyNumbers($event)"
+      (paste)="blockPastetext($event)"
+      [class.is-invalid]="simulation.invalid && (simulation.touched || simulation.dirty)" />
+    <small style="margin-left: 1rem;" *ngIf="numberOfGames!=null && numberOfGames<=0" class="text-danger">Value must
+      be 1 or greater</small>
+
+  </div>
+  <!-- end of form group for user input of simulations count -->
+  <!-- check box element start here -->
+  <div class="form-check">
+    <label class="form-check-label fw-bold">Do you want to switch door [By defualt not switch door]</label>
+    <input type="checkbox" class="form-check-input" [(ngModel)]="isSwitched">
+  </div>
+  <!-- end of check box element here -->
+  <!-- button for start simulator -->
+  <button type="button" class="btn btn-primary game-btn" (click)="startGame()" [disabled]="validateStartSimulatorButton()">Start Simulator</button>
+  <!-- end of button for start simulator -->
+</div>
+<!-- call loading component -->
+<app-loading [loading]="isLoading"></app-loading>
+<!-- end of loading component -->

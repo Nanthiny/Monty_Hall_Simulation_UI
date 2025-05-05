@@ -1,0 +1,59 @@
+<div class="main">
+  <!-- welcome message start here -->
+  <div class="welcome-text">
+    <h3 class="fw-bold">WELCOME TO MONTY HALL GAME SIMULATOR</h3>
+  </div>
+  <!-- welcome message end here -->
+  <!-- user input for number of games to play -->
+  <app-simulation-form (response)="getResponse($event)"></app-simulation-form>
+  <!-- end of user input for number of games to play -->
+  <!-- section for simulator response start here-->
+  <div class="game-result-chart row"
+    *ngIf="simulationResponse?.gameWinningResponses && simulationResponse.gameWinningResponses.length > 0">
+    <!-- chart for visualize -->
+    <div class=" col-xs-12 col-md-6 chart">
+      <h6>Simulations Chart</h6>
+      <p-chart type="doughnut" class="pchart" [data]="data" [options]="options" />
+    </div>
+    <!-- end of chart for visualize  -->
+    <!-- table view of overall summary -->
+    <div class="col-xs-12 col-md-6 summary">
+      <h6>Simulations Summary</h6>
+      <table class="table table-bordered m-lg-2" style="width: 100%; border-collapse: collapse;">
+        <tbody>
+          <!-- section for display simulations count -->
+          <tr>
+            <th class="text-start">Simulations</th>
+            <td class="text-end">{{ simulationResponse.numberOfSimulations }}</td>
+          </tr>
+          <!-- end of section for display simulations count -->
+          <!-- section for door switched or not -->
+          <tr>
+            <th class="text-start">Door Switched</th>
+            <td class="text-end">{{ simulationFormComponent?.isSwitched ? 'Yes':'No' }}</td>
+          </tr>
+          <!-- end of section section for door switched or not -->
+          <!-- section for display win/loss chances -->
+          <tr *ngFor="let result of simulationResponse?.gameWinningResponses">
+            <th class="text-start">{{ result.label }}</th>
+            <td class="text-end">{{ result.value }}</td>
+          </tr>
+          <!-- end of section for display win/loss chances -->
+          <!-- section for display winning percentage -->
+          <tr>
+            <th class="text-start">Winning Percentage</th>
+            <td class="text-end fw-bold">{{ simulationResponse.winningPercentage | number:'1.2-2' }}%</td>
+          </tr>
+          <!-- end of section for display winning percentage -->
+        </tbody>
+      </table>
+      <p class="fw-bold">{{conclusionText}}</p>
+    </div>
+    <!-- end of table view of overall summary -->
+  </div>
+</div>
+<!-- section for simulator response end here-->
+<!-- toast message start here -->
+<p-toast position="bottom-right" />
+<!-- end of toast message -->
+

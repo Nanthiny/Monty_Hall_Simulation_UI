@@ -1,0 +1,15 @@
+.spinner-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(233, 230, 230, 0.7);
+}
+.custom-spinner {
+  width: 30px;
+  height: 30px;
+}
